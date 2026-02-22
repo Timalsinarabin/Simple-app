@@ -16,16 +16,17 @@ GEM
       rack (~> 2.2)
       rack-protection (= 2.2.2)
       tilt (~> 2.0)
+    sqlite3 (2.9.0-x86_64-linux-gnu)
     tilt (2.7.0)
 
 PLATFORMS
-  ruby
   x86_64-linux
 
 DEPENDENCIES
   ostruct
   puma (= 5.6.5)
   sinatra (= 2.2.2)
+  sqlite3
 
 CHECKSUMS
   mustermann (2.0.2) sha256=cbe651b6c039e4cefa635b8087398ff59d74f83591064926cc62d37ac4c7e054
@@ -36,6 +37,7 @@ CHECKSUMS
   rack-protection (2.2.2) sha256=fd41414dbabbec274af0bdb1f72a48504449de4d979782c9af38cbb5dfff3299
   ruby2_keywords (0.0.5) sha256=ffd13740c573b7301cf7a2e61fc857b2a8e3d3aff32545d6f8300d8bae10e3ef
   sinatra (2.2.2) sha256=7f335aa51fbe8e70452606e1c1c42b65bee3f58fa865154d3ab80cdfcab97255
+  sqlite3 (2.9.0-x86_64-linux-gnu) sha256=72fff9bd750070ba3af695511ba5f0e0a2d8a9206f84869640b3e99dfaf3d5a5
   tilt (2.7.0) sha256=0d5b9ba69f6a36490c64b0eee9f6e9aad517e20dcc848800a06eb116f08c6ab3
 
 BUNDLED WITH
