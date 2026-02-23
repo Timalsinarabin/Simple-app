@@ -7,6 +7,11 @@
     <title>Login</title>
 </head>
 <body class="bg-gray-100 min-h-screen">
+    <% if session[:message] %>
+        <div class="absolute bg-green-500 text-white p-4 text-center rounded shadow-md top-20 left-1">
+            <%= session[:message] %>
+        </div>
+    <% end %>
     <header class="bg-gray-800 text-white p-4">
         <h1 class="text-2xl font-bold text-center">Login</h1>
     </header>

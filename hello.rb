@@ -2,6 +2,8 @@ require "sinatra"
 require "sqlite3"
 require "bcrypt"
 
+enable :sessions
+
 DB = SQLite3::Database.new 'auth.db'
 DB.results_as_hash = true
 DB.execute <<-SQL
