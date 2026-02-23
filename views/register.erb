@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Login</title>
+    <title>Register</title>
 </head>
 <body class="bg-gray-100 min-h-screen">
     <header class="bg-gray-800 text-white p-4">
-        <h1 class="text-2xl font-bold text-center">Login</h1>
+        <h1 class="text-2xl font-bold text-center">Register</h1>
     </header>
     <main class="flex items-center justify-center my-10">
-        <form class="bg-white p-6 rounded shadow-md" action="/login" method="post">
+        <form class="bg-white p-6 rounded shadow-md" action="/register" method="post">
             <label class="block mb-2" for="username">Username:</label>
             <input class="border border-gray-300 rounded px-3 py-2 w-full outline-none focus:ring-2 focus:ring-blue-500" type="text" id="username" name="username" required>
             <br>
@@ -19,11 +19,11 @@
             <input class="border border-gray-300 rounded px-3 py-2 w-full outline-none focus:ring-2 focus:ring-blue-500" type="password" id="password" name="password" required>
             <br>
             <div class="flex justify-center w-full">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" type="submit">Login</button>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" type="submit">Register</button>
             </div>
-            <label class="block mt-4 text-center text-sm" for="register">Don't have an account?</label>
+            <label class="block mt-4 text-center text-sm" for="register">Already have an account?</label>
             <div class="flex justify-center w-full">
-                <a class="text-blue-500 hover:text-blue-700 font-bold" href="/register">Register now</a>
+                <a class="text-blue-500 hover:text-blue-700 font-bold" href="/login">Login now</a>
             </div>
         </form>
     </main>
