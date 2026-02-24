@@ -7,10 +7,15 @@
     <title>Register</title>
 </head>
 <body class="bg-gray-100 min-h-screen">
+    <% if session[:message1] %>
+        <div class="absolute bg-red-500 text-white p-4 text-center rounded shadow-md top-20 left-1">
+            <%= session[:message1] %>
+        </div>
+    <% end %>
     <header class="bg-gray-800 text-white p-4">
         <h1 class="text-2xl font-bold text-center">Register</h1>
     </header>
-    <main class="flex items-center justify-center my-10">
+    <main class="flex items-center justify-center my-20">
         <form class="bg-white p-6 rounded shadow-md" action="/register" method="post">
             <label class="block mb-2" for="username">Username:</label>
             <input class="border border-gray-300 rounded px-3 py-2 w-full outline-none focus:ring-2 focus:ring-blue-500" type="text" id="username" name="username" required>
