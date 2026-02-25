@@ -22,11 +22,17 @@ get '/register' do
 end
 
 post '/register' do
+  user = DB.execute("Select * from users where username=?",[params[:username]]).first
+  if user
+    session[:message1] = "The user already exists.Please try another username"
+    redirect"/register"
+  end
   password = BCrypt::Password.create(params[:password])
   DB.execute("INSERT INTO users(username,password) VALUES (?,?)",[params[:username],password])
   session[:reg_message] = "Registration Sucessful"
   redirect"/login"
 end
+
 post '/login' do
   user = DB.execute("Select * from users where username=?",[params[:username]]).first
 
