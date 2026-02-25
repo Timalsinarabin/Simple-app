@@ -24,15 +24,28 @@ end
 post '/register' do
   password = BCrypt::Password.create(params[:password])
   DB.execute("INSERT INTO users(username,password) VALUES (?,?)",[params[:username],password])
-  session[:message] = "Registration Sucessful"
+  session[:reg_message] = "Registration Sucessful"
   redirect"/login"
 end
 post '/login' do
   user = DB.execute("Select * from users where username=?",[params[:username]]).first
 
   if user && BCrypt::Password.new(user["password"])==params[:password]
-    "Login Sucessful, Hello #{params[:username]}"
+    session[:user_id] = user["id"]
+    session[:username] = user["username"]
+    redirect "/dashboard"
   else
-    "login falied. Please check your username and password"
+    session[:err_message] = "Please check your username and password"
+    redirect"/login"
   end  
+end
+
+get "/dashboard" do 
+  redirect "/login" unless session[:user_id]
+  erb :dashboard
+end
+
+get '/logout' do
+  session.clear
+  redirect '/login'
 end
