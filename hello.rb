@@ -13,6 +13,15 @@ DB.execute <<-SQL
     password VARCHAR(100)
   )
 SQL
+DB.execute <<-SQL
+  CREATE TABLE IF NOT EXISTS books(
+    id INTEGER PRIMARY KEY,
+    bookname VARCHAR(50),
+    author VARCHAR(50)
+  )
+SQL
+
+
 get ['/','/login'] do
   erb :index;
 end
@@ -46,12 +55,23 @@ post '/login' do
   end  
 end
 
-get "/dashboard" do 
+get ["/dashboard",'/viewall'] do 
   redirect "/login" unless session[:user_id]
+  @books = DB.execute 'select * from books'
   erb :dashboard
 end
 
 get '/logout' do
   session.clear
   redirect '/login'
+end
+
+post '/add_book' do
+  DB.execute 'insert into books (bookname,author) values(?,?)', [params[:title], params[:author]]
+  redirect '/dashboard'
+end
+
+post '/remove_book' do
+  DB.execute 'delete from books where bookname = (?)', [params[:title]]
+  redirect '/dashboard'
 end
