@@ -57,7 +57,13 @@ end
 
 get ["/dashboard",'/viewall'] do 
   redirect "/login" unless session[:user_id]
-  @books = DB.execute 'select * from books'
+  per_page = 4
+  page = (params[:page] || 1).to_i
+  offset = (page - 1)* per_page
+  @books = DB.execute("select * from books LIMIT ? OFFSET ?", [per_page, offset])
+  total_books = DB.get_first_value('select count(*) as count from books')
+  @total_pages = (total_books/per_page.to_f).ceil
+  @current_page = page
   erb :dashboard
 end
 
