@@ -7,6 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
+    <% if session[:sucessMessage] %>
+        <div class="message-box absolute bg-green-500 text-white p-4 text-center rounded shadow-md top-20 right-5">
+            <%= session.delete(:sucessMessage) %>
+        </div>
+    <% elsif session[:errorMessage] %>
+        <div class="message-box absolute bg-red-500 text-white p-4 text-center rounded shadow-md top-20 right-5">
+            <%= session.delete(:errorMessage) %>
+        </div>
+    <% end %>
     <h1 class="text-2xl font-bold text-center mt-10">Welcome, <%= session[:username] %>!</h1>
     <p class="text-center">Digital library</p>
     <aside class="sidebar box-border border-r-2 bg-purple-100 h-screen p-3 top-0 absolute">
@@ -17,7 +26,7 @@
             </svg>
         </div>
         <div class="text-center mt-10">
-            <div class="nav-viewall cursor-pointer rounded-md bg-purple-200 hover:bg-purple-200 p-4 m-2">View All Books</div>
+            <div class="nav-viewall cursor-pointer rounded-md hover:bg-purple-200 p-4 m-2">View All Books</div>
             <div class="nav-addbook cursor-pointer rounded-md hover:bg-purple-200 p-4 m-2">Add a book</div>
             <div class="nav-removebook cursor-pointer rounded-md hover:bg-purple-200 p-4 m-2">Remove Book</div>
             <div class="nav-logout cursor-pointer p-2 bg-red-500 rounded-md hover:bg-red-700 text-white font-bold my-4"><a href="/logout">Logout</a></div>
@@ -30,8 +39,8 @@
                 <ul class="mt-4 md:col-span-2 lg:col-span-3">
                     <% @books.each do |book| %>
                         <li class="bg-white list-none p-4 rounded shadow-md hover:shadow-lg transition-shadow m-4">
-                            <h3 class="text-lg font-bold"><%= book['bookname'] %></h3>
-                            <p class="text-gray-600">By <%= book['author'] %></p>
+                            <h3 class="text-lg font-bold"><%= book.bookname %></h3>
+                            <p class="text-gray-600">By <%= book.author %></p>
                         </li>
                     <% end %>
                 </ul>
@@ -52,7 +61,7 @@
             <h2 class="text-xl font-bold mb-4">Add a New Book</h2>
             <form action="/add_book" method="post" class="bg-white p-6 rounded shadow-md">
                 <label class="block mb-2" for="title">Title:</label>
-                <input class="border border-gray-300 rounded px-3 py-2 w-full outline-none focus:ring-2 focus:ring-blue-500" type="text" id="title" name="title" required>
+                <input class="border border-gray-300 rounded px-3 py-2 w-full outline-none focus:ring-2 focus:ring-blue-500" type="text" id="bookname" name="bookname" required>
                 <br>
                 <label class="block mb-2 mt-4" for="author">Author:</label>
                 <input class="border border-gray-300 rounded px-3 py-2 w-full outline-none focus:ring-2 focus:ring-blue-500" type="text" id="author" name="author" required>
@@ -66,7 +75,7 @@
             <h2 class="text-xl font-bold mb-4">Remove a Book</h2>
             <form action="/remove_book" method="post" class="bg-white p-6 rounded shadow-md">
                 <label class="block mb-2" for="title">Title:</label>
-                <input class="border border-gray-300 rounded px-3 py-2 w-full outline-none focus:ring-2 focus:ring-blue-500" type="text" id="title" name="title" required>
+                <input class="border border-gray-300 rounded px-3 py-2 w-full outline-none focus:ring-2 focus:ring-blue-500" type="text" id="bookname" name="bookname">
                 <br>
                 <div class="flex justify-center w-full">
                     <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4" type="submit">Remove Book</button>
@@ -74,6 +83,7 @@
             </form>
         </div>
     </main>
+    <script src="/js/index.js"></script>
     <script src="/js/menu.js"></script>
 </body>
 </html>
