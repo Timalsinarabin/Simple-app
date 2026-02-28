@@ -1,27 +1,29 @@
-require "sinatra"
-require "sinatra/activerecord"
-require "sqlite3"
-require "bcrypt"
-require "./models/user"
-require "./models/library"
+# frozen_string_literal: true
+
+require 'sinatra'
+require 'sinatra/activerecord'
+require 'sqlite3'
+require 'bcrypt'
+require './models/user'
+require './models/library'
 
 enable :sessions
 
-set :database, {adapter: "sqlite3", database: "db/development.sqlite3"}
+set :database, { adapter: 'sqlite3', database: 'db/development.sqlite3' }
 
 # Login and Registration
 
-get ['/','/login'] do
-  erb :index;
+get ['/', '/login'] do
+  erb :index
 end
 
 get '/register' do
-  erb :register;
+  erb :register
 end
 
 post '/register' do
   if User.find_by(username: params[:username])
-    session[:message1] = "User already exists"
+    session[:message1] = 'User already exists'
     redirect '/register'
   end
 
@@ -31,36 +33,36 @@ post '/register' do
   )
   if user.save
     session[:user_id] = user.id
-    redirect"/dashboard"
+    redirect '/dashboard'
   else
-    session[:message1] = "Registration failed"
-    redirect"/register"
+    session[:message1] = 'Registration failed'
+    redirect '/register'
   end
 end
 
 post '/login' do
   user = User.find_by(username: params[:username])
 
-  if user && user.authenticate(params[:password])
+  if user&.authenticate(params[:password])
     session[:user_id] = user.id
     session[:username] = user.username
-    redirect "/dashboard"
+    redirect '/dashboard'
   else
-    session[:err_message] = "Please check your username and password"
-    redirect"/login"
-  end  
+    session[:err_message] = 'Please check your username and password'
+    redirect '/login'
+  end
 end
 
-#Library
+# Library
 
-get ["/dashboard",'/viewall'] do 
-  redirect "/login" unless session[:user_id]
+get ['/dashboard', '/viewall'] do
+  redirect '/login' unless session[:user_id]
   per_page = 4
   page = (params[:page] || 1).to_i
-  offset = (page - 1)* per_page
+  offset = (page - 1) * per_page
   @books = Library.limit(per_page).offset(offset)
   total_books = Library.count
-  @total_pages = (total_books/per_page.to_f).ceil
+  @total_pages = (total_books / per_page.to_f).ceil
   @current_page = page
   erb :dashboard
 end
@@ -76,9 +78,9 @@ post '/add_book' do
     author: params[:author]
   )
   if book.save
-    session[:sucessMessage] = "Book added sucessfully"
+    session[:sucessMessage] = 'Book added sucessfully'
   else
-    session[:errorMessage] = "Failed to add book"
+    session[:errorMessage] = 'Failed to add book'
   end
   redirect '/dashboard'
 end
@@ -87,9 +89,9 @@ post '/remove_book' do
   book = Library.find_by(bookname: params[:bookname])
   if book
     book.destroy
-    session[:sucessMessage] = "Book removed sucessfully"
+    session[:sucessMessage] = 'Book removed sucessfully'
   else
-    session[:errorMessage] = "Falied to remove book"
+    session[:errorMessage] = 'Falied to remove book'
   end
   redirect '/dashboard'
 end
