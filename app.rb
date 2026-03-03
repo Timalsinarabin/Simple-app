@@ -6,7 +6,7 @@ require 'sqlite3'
 require 'bcrypt'
 require './models/user'
 require './models/library'
-
+require_relative './models/borrower'
 enable :sessions
 
 set :database, { adapter: 'sqlite3', database: 'db/development.sqlite3' }
@@ -92,6 +92,19 @@ post '/remove_book' do
     session[:sucessMessage] = 'Book removed sucessfully'
   else
     session[:errorMessage] = 'Falied to remove book'
+  end
+  redirect '/dashboard'
+end
+
+post '/loan_book' do
+  borrow = Borrower.new(
+    borrower: params[:borrower],
+    bookname: params[:bookname]
+  )
+  if borrow.save
+    session[:sucessMessage] = 'Borrowed sucessfully'
+  else
+    session[:errorMessage] = 'Failed to borrow book'
   end
   redirect '/dashboard'
 end

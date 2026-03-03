@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,18 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2) do
-  create_table 'books', force: :cascade do |t|
-    t.string 'author'
-    t.string 'bookname'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
+ActiveRecord::Schema[8.1].define(version: 3) do
+  create_table "books", force: :cascade do |t|
+    t.string "author"
+    t.string "bookname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.datetime 'created_at', null: false
-    t.string 'password_digest'
-    t.datetime 'updated_at', null: false
-    t.string 'username'
+  create_table "borrowers", force: :cascade do |t|
+    t.string "bookname"
+    t.string "borrower"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "password_digest"
+    t.datetime "updated_at", null: false
+    t.string "username"
   end
 end

@@ -7,8 +7,9 @@ const removebookform = document.querySelector('.remove-book-form');
 const menu = document.querySelector('.side-menu');
 const title = document.querySelector('.title');
 const logout = document.querySelector('.nav-logout');
-
-const sections = [removebook, viewall, addbook, title, logout]
+const loanBook = document.querySelector('.nav-loanBook');
+const loanBookForm = document.querySelector('.loan-book-form');
+const sections = [removebook, viewall, addbook, title, logout, loanBook];
 
 console.log("Menu JS loaded");
 
@@ -24,6 +25,7 @@ addbook.addEventListener('click', () => {
     addbookform.classList.remove('hidden');
     removebookform.classList.add('hidden');
     viewAllBooks.classList.add('hidden');
+    loanBookForm.classList.add('hidden');
     HideMenu();
 });
 
@@ -31,6 +33,7 @@ viewall.addEventListener('click', () => {
     addbookform.classList.add('hidden');
     removebookform.classList.add('hidden');
     viewAllBooks.classList.remove('hidden');
+    loanBookForm.classList.add('hidden');
     HideMenu();
 });
 
@@ -38,5 +41,13 @@ removebook.addEventListener('click', () => {
     addbookform.classList.add('hidden');
     removebookform.classList.remove('hidden');
     viewAllBooks.classList.add('hidden');
+    loanBookForm.classList.add('hidden');
+    HideMenu();
+});
+loanBook.addEventListener('click', () => {
+    addbookform.classList.add('hidden');
+    removebookform.classList.add('hidden');
+    viewAllBooks.classList.add('hidden');
+    loanBookForm.classList.remove('hidden');
     HideMenu();
 });
