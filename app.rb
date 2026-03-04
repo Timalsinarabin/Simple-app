@@ -55,15 +55,17 @@ end
 
 # Library
 
-get ['/dashboard', '/viewall'] do
+get ['/dashboard', '/viewall', '/viewborrow'] do
   redirect '/login' unless session[:user_id]
   per_page = 4
   page = (params[:page] || 1).to_i
   offset = (page - 1) * per_page
-  @books = Library.limit(per_page).offset(offset)
+  @books = Library.order(bookname: :asc).limit(per_page).offset(offset)
   total_books = Library.count
   @total_pages = (total_books / per_page.to_f).ceil
   @current_page = page
+
+  @borrows = Borrower.order(created_at: :desc)
   erb :dashboard
 end
 
@@ -97,14 +99,30 @@ post '/remove_book' do
 end
 
 post '/loan_book' do
-  borrow = Borrower.new(
-    borrower: params[:borrower],
-    bookname: params[:bookname]
-  )
-  if borrow.save
-    session[:sucessMessage] = 'Borrowed sucessfully'
+  book = Library.find_by(bookname: params[:bookname])
+  if book
+    borrow = Borrower.new(
+      borrower: params[:borrower],
+      bookname: params[:bookname]
+    )
+    if borrow.save
+      session[:sucessMessage] = 'Borrowed sucessfully'
+    else
+      session[:errorMessage] = 'Failed to borrow book'
+    end
   else
-    session[:errorMessage] = 'Failed to borrow book'
+    session[:errorMessage] = 'Book doesnot exists'
+  end
+  redirect '/dashboard'
+end
+
+get '/return_book/:id' do
+  ret = Borrower.find_by(id: params[:id])
+  if ret
+    ret.destroy
+    session[:sucessMessage] = 'Book removed sucessfully'
+  else
+    session[:errorMessage] = 'Falied to remove book'
   end
   redirect '/dashboard'
 end
