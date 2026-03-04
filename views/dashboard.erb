@@ -30,6 +30,7 @@
             <div class="nav-addbook cursor-pointer rounded-md hover:bg-purple-200 p-4 m-2">Add a book</div>
             <div class="nav-removebook cursor-pointer rounded-md hover:bg-purple-200 p-4 m-2">Remove Book</div>
             <div class="nav-loanBook cursor-pointer rounded-md hover:bg-purple-200 p-4 m-2">Loan a Book</div>
+            <div class="nav-listBorrow cursor-pointer rounded-md hover:bg-purple-200 p-4 m-2">List Borrowed Books</div>
             <div class="nav-logout cursor-pointer p-2 bg-red-500 rounded-md hover:bg-red-700 text-white font-bold my-4"><a href="/logout">Logout</a></div>
         </div>
     </aside>
@@ -96,6 +97,31 @@
                     <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded mt-4" type="submit">Loan Book</button>
                 </div>
             </form>
+        </div>
+        <div class="viewall-borrowed-books hidden flex flex-col">
+            <h2 class="text-xl font-bold">All Borrowed Books</h2>
+            <table>
+                <thead>
+                    <th class="text-left">Borrower</th>
+                    <th class="text-left">Book Title</th>
+                    <th class="text-left">Borrowed At</th>
+                </thead>
+                <tbody class="bg-white list-none p-4 rounded shadow-md hover:shadow-lg transition-shadow m-4">
+                    <% if @borrows.any? %>
+                        <% @borrows.each do |borrow| %>
+                        <tr>
+                            <td class="text-lg font-bold"><%= borrow.borrower %></td>
+                            <td class="text-gray-600"><%= borrow.bookname %></td>
+                            <td class="text-gray-600"><%= borrow.created_at.strftime("%B %d, %Y") %></td>
+                            <td class="text-red-500"><a href="/return_book/<%= borrow.id %>" class="hover:underline">Return</a></td>
+                        </tr>
+                        <% end %>
+                    <% else %>
+                        <p class="text-gray-600">No books currently borrowed.</p>
+                    <% end %>
+                </tbody>
+            </table>
+                
         </div>
     </main>
     <script src="/js/index.js"></script>

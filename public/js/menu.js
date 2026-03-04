@@ -9,7 +9,10 @@ const title = document.querySelector('.title');
 const logout = document.querySelector('.nav-logout');
 const loanBook = document.querySelector('.nav-loanBook');
 const loanBookForm = document.querySelector('.loan-book-form');
-const sections = [removebook, viewall, addbook, title, logout, loanBook];
+const listBorrowedBooks = document.querySelector('.nav-listBorrow');
+const listBorrowedBooksForm = document.querySelector('.viewall-borrowed-books');
+
+const sections = [removebook, viewall, addbook, title, logout, loanBook, listBorrowedBooks];
 
 console.log("Menu JS loaded");
 
@@ -26,6 +29,7 @@ addbook.addEventListener('click', () => {
     removebookform.classList.add('hidden');
     viewAllBooks.classList.add('hidden');
     loanBookForm.classList.add('hidden');
+    listBorrowedBooksForm.classList.add('hidden');
     HideMenu();
 });
 
@@ -34,6 +38,7 @@ viewall.addEventListener('click', () => {
     removebookform.classList.add('hidden');
     viewAllBooks.classList.remove('hidden');
     loanBookForm.classList.add('hidden');
+    listBorrowedBooksForm.classList.add('hidden');
     HideMenu();
 });
 
@@ -42,6 +47,16 @@ removebook.addEventListener('click', () => {
     removebookform.classList.remove('hidden');
     viewAllBooks.classList.add('hidden');
     loanBookForm.classList.add('hidden');
+    listBorrowedBooksForm.classList.add('hidden');
+    HideMenu();
+});
+
+removebook.addEventListener('click', () => {
+    addbookform.classList.add('hidden');
+    removebookform.classList.remove('hidden');
+    viewAllBooks.classList.add('hidden');
+    loanBookForm.classList.add('hidden');
+    listBorrowedBooksForm.classList.add('hidden');
     HideMenu();
 });
 loanBook.addEventListener('click', () => {
@@ -49,5 +64,14 @@ loanBook.addEventListener('click', () => {
     removebookform.classList.add('hidden');
     viewAllBooks.classList.add('hidden');
     loanBookForm.classList.remove('hidden');
+    listBorrowedBooksForm.classList.add('hidden');
+    HideMenu();
+});
+listBorrowedBooks.addEventListener('click', () => {
+    addbookform.classList.add('hidden');
+    removebookform.classList.add('hidden');
+    viewAllBooks.classList.add('hidden');
+    loanBookForm.classList.add('hidden');
+    listBorrowedBooksForm.classList.remove('hidden');
     HideMenu();
 });
