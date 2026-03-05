@@ -11,17 +11,16 @@ const loanBook = document.querySelector('.nav-loanBook');
 const loanBookForm = document.querySelector('.loan-book-form');
 const listBorrowedBooks = document.querySelector('.nav-listBorrow');
 const listBorrowedBooksForm = document.querySelector('.viewall-borrowed-books');
-
-const sections = [removebook, viewall, addbook, title, logout, loanBook, listBorrowedBooks];
+const sidebar = document.querySelector('.sidebar');
 
 console.log("Menu JS loaded");
 
 menu.addEventListener('click', HideMenu);
 
 function HideMenu() {
-    sections.forEach(section => {
-        section.classList.toggle('hidden');
-    });
+    sidebar.classList.toggle('sidebar-active');
+    sidebar.classList.toggle('sidebar-inactive');
+    logout.classList.toggle('hidden');
 };
 
 addbook.addEventListener('click', () => {
@@ -49,6 +48,7 @@ removebook.addEventListener('click', () => {
     loanBookForm.classList.add('hidden');
     listBorrowedBooksForm.classList.add('hidden');
     HideMenu();
+    console.log("Remove book clicked");
 });
 
 removebook.addEventListener('click', () => {
@@ -75,3 +75,4 @@ listBorrowedBooks.addEventListener('click', () => {
     listBorrowedBooksForm.classList.remove('hidden');
     HideMenu();
 });
+

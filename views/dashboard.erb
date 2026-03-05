@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
@@ -16,9 +17,9 @@
             <%= session.delete(:errorMessage) %>
         </div>
     <% end %>
-    <h1 class="text-2xl font-bold text-center mt-10">Welcome, <%= session[:username] %>!</h1>
+    <h1 class="text-2xl font-bold text-center mt-4">Welcome, <%= session[:username] %>!</h1>
     <p class="text-center">Digital library</p>
-    <aside class="sidebar box-border border-r-2 bg-purple-100 h-screen p-3 top-0 absolute">
+    <aside class="sidebar sidebar-active box-border border-r-2 bg-purple-100 h-screen p-5 top-0 absolute">
         <div class="aside-header min-w-8">
             <h5 class="title text-2xl p-2">Menu</h5>
             <svg class="side-menu bg-transparent absolute top-4 right-1 w-8 cursor-pointer hover:top-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -34,11 +35,11 @@
             <div class="nav-logout cursor-pointer p-2 bg-red-500 rounded-md hover:bg-red-700 text-white font-bold my-4"><a href="/logout">Logout</a></div>
         </div>
     </aside>
-    <main class="main-content container ml-20 pt-6">
+    <main class="main-content container ml-20 pt-6 w-4/5">
         <div class="viewall-books">
             <h2 class="text-xl font-bold">All Books</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                <ul class="mt-4 md:col-span-2 lg:col-span-3">
+                <ul class="md:col-span-2 lg:col-span-3">
                     <% @books.each do |book| %>
                         <li class="bg-white list-none p-4 rounded shadow-md hover:shadow-lg transition-shadow m-4">
                             <h3 class="text-lg font-bold"><%= book.bookname %></h3>
@@ -77,7 +78,7 @@
             <h2 class="text-xl font-bold mb-4">Remove a Book</h2>
             <form action="/remove_book" method="post" class="bg-white p-6 rounded shadow-md">
                 <label class="block mb-2" for="title">Title:</label>
-                <input class="border border-gray-300 rounded px-3 py-2 w-full outline-none focus:ring-2 focus:ring-blue-500" type="text" id="bookname" name="bookname">
+                <input class="border border-gray-300 rounded px-3 py-2 w-full outline-none focus:ring-2 focus:ring-blue-500" type="text" id="bookname" name="bookname" required>
                 <br>
                 <div class="flex justify-center w-full">
                     <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4" type="submit">Remove Book</button>
@@ -88,7 +89,7 @@
             <h2 class="text-xl font-bold mb-4">Loan a Book</h2>
             <form action="/loan_book" method="post" class="bg-white p-6 rounded shadow-md">
                 <label class="block mb-2" for="username">Borrower:</label>
-                <input class="border border-gray-300 rounded px-3 py-2 w-full outline-none focus:ring-2 focus:ring-blue-500" type="text" id="borrower" name="borrower">
+                <input class="border border-gray-300 rounded px-3 py-2 w-full outline-none focus:ring-2 focus:ring-blue-500" type="text" id="borrower" name="borrower" required>
                 <br>
                 <label class="block mb-2" for="bookname">Title:</label>
                 <input class="border border-gray-300 rounded px-3 py-2 w-full outline-none focus:ring-2 focus:ring-blue-500" type="text" id="bookname" name="bookname">

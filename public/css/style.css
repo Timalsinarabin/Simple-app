@@ -1,0 +1,8 @@
+.sidebar-active {
+    left: 0;
+    transition: left 0.3s ease-in-out;
+}
+.sidebar-inactive {
+    left: -180px; /* Adjust this value based on your sidebar width */
+    transition: left 0.3s ease-in-out;
+}
