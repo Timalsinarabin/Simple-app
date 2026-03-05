@@ -120,7 +120,7 @@ get '/return_book/:id' do
   ret = Borrower.find_by(id: params[:id])
   if ret
     ret.destroy
-    session[:sucessMessage] = 'Book removed sucessfully'
+    session[:sucessMessage] = 'Book returned sucessfully'
   else
     session[:errorMessage] = 'Falied to remove book'
   end
