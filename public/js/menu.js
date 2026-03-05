@@ -21,6 +21,7 @@ function HideMenu() {
     sidebar.classList.toggle('sidebar-active');
     sidebar.classList.toggle('sidebar-inactive');
     logout.classList.toggle('hidden');
+    listBorrowedBooks.classList.toggle('hidden');
 };
 
 addbook.addEventListener('click', () => {
@@ -51,14 +52,6 @@ removebook.addEventListener('click', () => {
     console.log("Remove book clicked");
 });
 
-removebook.addEventListener('click', () => {
-    addbookform.classList.add('hidden');
-    removebookform.classList.remove('hidden');
-    viewAllBooks.classList.add('hidden');
-    loanBookForm.classList.add('hidden');
-    listBorrowedBooksForm.classList.add('hidden');
-    HideMenu();
-});
 loanBook.addEventListener('click', () => {
     addbookform.classList.add('hidden');
     removebookform.classList.add('hidden');
